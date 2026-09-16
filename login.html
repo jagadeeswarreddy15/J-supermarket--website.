@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supermarket - Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a class="logo" href="index.html">🛒 SuperMart</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+    </div>
+  </nav>
+
+  <main class="login-container">
+    <form id="loginForm" class="login-card">
+      <h1>Login</h1>
+      <p>Sign in to your SuperMart account</p>
+
+      <label>Email</label>
+      <input id="email" type="email" placeholder="Enter your email" required>
+
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Enter your password" required minlength="6">
+
+      <button type="submit">Login</button>
+      <p id="loginMessage"></p>
+    </form>
+  </main>
+
+  <footer>© 2026 SuperMart</footer>
+  <script src="script.js"></script>
+</body>
+</html>

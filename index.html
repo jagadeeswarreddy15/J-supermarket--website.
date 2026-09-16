@@ -3,31 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Supermarket</title>
+  <title>Supermarket - Home</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>🛒 Supermarket</h1>
-    <p>Fresh products at your fingertips</p>
+  <nav class="navbar">
+    <a class="logo" href="index.html">🛒 SuperMart</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="login.html">Login</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Welcome to SuperMart</h1>
+    <p>Find your everyday supermarket products quickly.</p>
+
+    <div class="search-box">
+      <input id="searchInput" type="text" placeholder="Search products..." autocomplete="off">
+      <button onclick="searchProducts()">🔍 Search</button>
+    </div>
+    <div id="suggestions"></div>
   </header>
 
-  <main>
-    <div class="top-bar">
-      <input id="searchBox" type="text" placeholder="Search products...">
-      <select id="categoryFilter">
-        <option value="all">All Categories</option>
-      </select>
+  <section class="categories">
+    <h2>Shop by Category</h2>
+    <div class="category-grid">
+      <div>🍎 Fruits</div>
+      <div>🥦 Vegetables</div>
+      <div>🥛 Dairy</div>
+      <div>🍚 Grains</div>
+      <div>🫘 Pulses</div>
+      <div>🧼 Cleaning</div>
     </div>
+  </section>
 
-    <p id="resultCount"></p>
-    <section id="productGrid" class="product-grid"></section>
-  </main>
+  <section class="products">
+    <h2>Popular Products</h2>
+    <div id="productList" class="product-grid"></div>
+  </section>
 
-  <footer>
-    <p>© 2026 Supermarket</p>
-  </footer>
-
+  <footer>© 2026 SuperMart</footer>
   <script src="script.js"></script>
 </body>
 </html>
