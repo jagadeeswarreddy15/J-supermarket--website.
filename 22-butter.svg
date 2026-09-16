@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
+<rect width="500" height="500" rx="28" fill="#f7f7f7"/>
+<rect x="35" y="35" width="430" height="430" rx="22" fill="white" stroke="#ddd" stroke-width="3"/>
+<circle cx="250" cy="220" r="125" fill="#f1f1f1"/>
+<text x="250" y="255" text-anchor="middle" font-size="120" font-family="Arial, sans-serif">🧈</text>
+<text x="250" y="390" text-anchor="middle" font-size="28" font-family="Arial, sans-serif" font-weight="700">Butter</text>
+<text x="250" y="425" text-anchor="middle" font-size="17" font-family="Arial, sans-serif" fill="#777">Supermarket Product</text>
+</svg>
