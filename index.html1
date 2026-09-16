@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J Supermarket</title>
+    <style>
+        :root {
+            --primary-color: #1b5e20;
+            --secondary-color: #2e7d32;
+            --accent-color: #ff9800;
+            --bg-color: #f4f6f8;
+            --text-color: #333;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        header {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 16px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        .cart-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+        }
+        .search-container {
+            background-color: var(--primary-color);
+            padding: 20px;
+            text-align: center;
+        }
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .search-bar input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+        .search-bar button {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        h2.section-title {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 8px;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .category-card {
+            background: white;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e0e0e0;
+        }
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+            border: 1px solid #eee;
+        }
+        .product-card:hover {
+            transform: translateY(-3px);
+        }
+        .product-img-box {
+            height: 130px;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font-size: 45px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .product-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #e8f5e9;
+            color: var(--primary-color);
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .product-details {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .product-brand {
+            font-size: 11px;
+            color: #777;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .product-name {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .product-price {
+            font-size: 17px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .add-to-cart-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 7px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .add-to-cart-btn:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <div class="logo-icon">🛒</div>
+                <span>J SUPERMARKET</span>
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="filterCategory('All')">Home</a></li>
+                <li><a>Login</a></li>
+                <li><a class="cart-btn">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search products..." onkeyup="searchProducts()">
+            <button onclick="searchProducts()">🔍</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="categories-grid" id="categories-container"></div>
+
+        <h2 class="section-title" id="product-section-title">All Products (50 Items)</h2>
+        <div class="products-grid" id="products-container"></div>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, name: "Rice", category: "Grains", brand: "India Gate", price: 650, icon: "🍚" },
+            { id: 2, name: "Wheat Flour", category: "Grains", brand: "Aashirvaad", price: 280, icon: "🌾" },
+            { id: 3, name: "Sugar", category: "Grocery", brand: "Madhur", price: 48, icon: "🧊" },
+            { id: 4, name: "Salt", category: "Grocery", brand: "Tata", price: 28, icon: "🧂" },
+            { id: 5, name: "Toor Dal", category: "Pulses", brand: "Tata Sampann", price: 180, icon: "🥣" },
+            { id: 6, name: "Moong Dal", category: "Pulses", brand: "Fortune", price: 150, icon: "🥣" },
+            { id: 7, name: "Chana Dal", category: "Pulses", brand: "Tata Sampann", price: 120, icon: "🥣" },
+            { id: 8, name: "Cooking Oil", category: "Oils", brand: "Fortune", price: 145, icon: "🛢️" },
+            { id: 9, name: "Tea Powder", category: "Beverages", brand: "Tata Tea", price: 250, icon: "☕" },
+            { id: 10, name: "Coffee", category: "Beverages", brand: "Bru", price: 320, icon: "☕" },
+            { id: 11, name: "Milk", category: "Dairy", brand: "Amul", price: 32, icon: "🥛" },
+            { id: 12, name: "Curd", category: "Dairy", brand: "Amul", price: 35, icon: "🥛" },
+            { id: 13, name: "Butter", category: "Dairy", brand: "Amul", price: 58, icon: "🧈" },
+            { id: 14, name: "Cheese", category: "Dairy", brand: "Amul", price: 120, icon: "🧀" },
+            { id: 15, name: "Bread", category: "Bakery", brand: "Britannia", price: 45, icon: "🍞" },
+            { id: 16, name: "Biscuits", category: "Snacks", brand: "Parle", price: 30, icon: "🍪" },
+            { id: 17, name: "Potato Chips", category: "Snacks", brand: "Lay's", price: 20, icon: "🥔" },
+            { id: 18, name: "Noodles", category: "Instant Food", brand: "Maggi", price: 15, icon: "🍜" },
+            { id: 19, name: "Tomato Ketchup", category: "Sauces", brand: "Kissan", price: 110, icon: "🍅" },
+            { id: 20, name: "Jam", category: "Spreads", brand: "Kissan", price: 140, icon: "🍓" },
+            { id: 21, name: "Toothpaste", category: "Personal Care", brand: "Colgate", price: 95, icon: "🦷" },
+            { id: 22, name: "Toothbrush", category: "Personal Care", brand: "Oral-B", price: 60, icon: "🪥" },
+            { id: 23, name: "Bath Soap", category: "Personal Care", brand: "Dove", price: 55, icon: "🧼" },
+            { id: 24, name: "Shampoo", category: "Personal Care", brand: "Clinic Plus", price: 120, icon: "🧴" },
+            { id: 25, name: "Hand Wash", category: "Personal Care", brand: "Dettol", price: 110, icon: "🧴" },
+            { id: 26, name: "Laundry Detergent", category: "Cleaning", brand: "Surf Excel", price: 210, icon: "✨" },
+            { id: 27, name: "Dishwash Liquid", category: "Cleaning", brand: "Vim", price: 120, icon: "🍽️" },
+            { id: 28, name: "Floor Cleaner", category: "Cleaning", brand: "Lizol", price: 180, icon: "🧹" },
+            { id: 29, name: "Tissue Paper", category: "Household", brand: "Origami", price: 90, icon: "🧻" },
+            { id: 30, name: "Mineral Water", category: "Beverages", brand: "Bisleri", price: 20, icon: "💧" },
+            { id: 31, name: "Apple", category: "Fruits", brand: "Fresh", price: 180, icon: "🍎" },
+            { id: 32, name: "Banana", category: "Fruits", brand: "Fresh", price: 60, icon: "🍌" },
+            { id: 33, name: "Orange", category: "Fruits", brand: "Fresh", price: 100, icon: "🍊" },
+            { id: 34, name: "Tomato", category: "Vegetables", brand: "Fresh", price: 50, icon: "🍅" },
+            { id: 35, name: "Onion", category: "Vegetables", brand: "Fresh", price: 45, icon: "🧅" },
+            { id: 36, name: "Green Gram", category: "Pulses", brand: "Fortune", price: 140, icon: "🟢" },
+            { id: 37, name: "Black Eyed Peas", category: "Pulses", brand: "Tata Sampann", price: 130, icon: "🫘" },
+            { id: 38, name: "Cashews", category: "Dry Fruits", brand: "Nutraj", price: 450, icon: "🥜" },
+            { id: 39, name: "Almonds", category: "Dry Fruits", brand: "Happilo", price: 480, icon: "🥜" },
+            { id: 40, name: "Raisins", category: "Dry Fruits", brand: "Nutraj", price: 250, icon: "🍇" },
+            { id: 41, name: "Honey", category: "Grocery", brand: "Dabur", price: 220, icon: "🍯" },
+            { id: 42, name: "Ghee", category: "Dairy", brand: "Amul", price: 350, icon: "🏺" },
+            { id: 43, name: "Paneer", category: "Dairy", brand: "Amul", price: 90, icon: "🧀" },
+            { id: 44, name: "Ice Cream", category: "Dairy", brand: "Kwality Wall's", price: 200, icon: "🍨" },
+            { id: 45, name: "Green Tea", category: "Beverages", brand: "Lipton", price: 210, icon: "🍵" },
+            { id: 46, name: "Fruit Juice", category: "Beverages", brand: "Real", price: 130, icon: "🧃" },
+            { id: 47, name: "Cabbage", category: "Vegetables", brand: "Fresh", price: 35, icon: "🥬" },
+            { id: 48, name: "Carrot", category: "Vegetables", brand: "Fresh", price: 60, icon: "🥕" },
+            { id: 49, name: "Papaya", category: "Fruits", brand: "Fresh", price: 70, icon: "🍈" },
+            { id: 50, name: "Mango", category: "Fruits", brand: "Fresh", price: 120, icon: "🥭" }
+        ];
+
+        let cartCount = 0;
+
+        function renderCategories() {
+            const categoriesContainer = document.getElementById('categories-container');
+            const uniqueCategories = ['All', ...new Set(products.map(p => p.category))];
+            
+            categoriesContainer.innerHTML = uniqueCategories.map(cat => `
+                <div class="category-card" onclick="filterCategory('${cat}')">
+                    <div style="font-size: 26px; margin-bottom: 5px;">📦</div>
+                    <div style="font-weight: bold; font-size: 13px; color: #333;">${cat}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderProducts(items) {
+            const container = document.getElementById('products-container');
+            if(items.length === 0) {
+                container.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">No products found.</p>`;
+                return;
+            }
+            
+            container.innerHTML = items.map(p => `
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">${p.category}</span>
+                        <span>${p.icon}</span>
+                    </div>
+                    <div class="product-details">
+                        <span class="product-brand">${p.brand}</span>
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-footer">
+                            <span class="product-price">₹${p.price}</span>
+                            <button class="add-to-cart-btn" onclick="addToCart('${p.name}')">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCategory(category) {
+            const titleEl = document.getElementById('product-section-title');
+            if(category === 'All') {
+                titleEl.innerText = `All Products (${products.length} Items)`;
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                titleEl.innerText = `${category} (${filtered.length} Items)`;
+                renderProducts(filtered);
+            }
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.brand.toLowerCase().includes(query) || 
+                p.category.toLowerCase().includes(query)
+            );
+            document.getElementById('product-section-title').innerText = `Search Results (${filtered.length} Items)`;
+            renderProducts(filtered);
+        }
+
+        function addToCart(itemName) {
+            cartCount++;
+            document.getElementById('cart-count').innerText = cartCount;
+            alert(`${itemName} cart లోకి జోడించబడింది!`);
+        }
+
+        window.onload = function() {
+            renderCategories();
+            renderProducts(products);
+        };
+    </script>
+</body>
+</html>
